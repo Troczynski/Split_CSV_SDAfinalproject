@@ -33,15 +33,22 @@ def Wtg_list(saved_rows):
     return turbines_list
 
 turbines_list = Wtg_list(saved_rows)
+#check end of turbines list
 
 
 
-time_period = "time period:"
+def MeasureValues(saved_rows, turbines_list):
+    for element in turbines_list:
+        nameOfTurbine = element.replace("/", "_")
+        nextfileWTG = open(nameOfTurbine, "w+")
+        nextfileWTG.write()
 
-print(repr(str(saved_rows[12])[0:12]))
 
-def MeasureValues(self):
+        nextfileWTG.close()
+
+
     print("function work MV")
+
 
 
 
@@ -53,7 +60,7 @@ def StatusCode(self):
 
 
 
-
+#app choose type of file SC or MV
 if saved_rows[1] == sgre_measured_values:
     MeasureValues(saved_rows)
 elif saved_rows[1] == sgre_status_code:
