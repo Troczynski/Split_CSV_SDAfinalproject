@@ -5,8 +5,10 @@ from re import search
 
 
 
-#dostajemy csieżkę pliku do dir big file
-dir_big_file = open("ALL_LDK_GRB_SC_30-04.04.23.csv", "r")
+#dostajemy csieżkę pliku do dir big file All.csv
+a = "All.csv"
+b = "ALL_LDK_GRB_SC_30-04.04.23.csv"
+dir_big_file = open(b, "r")
 
 #sprawdzamy rodzaj pliku
 saved_rows = []
@@ -37,10 +39,7 @@ turbines_list = Wtg_list(saved_rows)
 time_period = "time period:"
 
 print(repr(str(saved_rows[12])[0:12]))
-print(repr(time_period))
-print((str(saved_rows[12])[0:12]) == time_period)
-print(turbines_list)
-print(len(turbines_list))
+
 def MeasureValues(self):
     print("function work MV")
 
