@@ -9,6 +9,7 @@ from re import search
 a = "All.csv"
 b = "ALL_LDK_GRB_SC_30-04.04.23.csv"
 c ="SDA_ALL_BUK_MV.csv"
+d ="SDA ALL GZK WTG MV.csv"
 dir_big_file = open(c, "r")
 
 #sprawdzamy rodzaj pliku
@@ -28,8 +29,8 @@ def Wtg_list(saved_rows):
     for el in saved_rows[3:]:
         if str(el)[0:12] == time_period:
             break
-        turbines_list.append(el[:-2])
-        sc = [f'Status codes for  {el[:-2]}']
+        turbines_list.append(el[:-1])
+        sc = [f'Status codes for  {el[:-1]}']
         start_Status_codes_for.append(sc)
     return turbines_list
 
@@ -45,19 +46,29 @@ def MeasureValues(saved_rows, turbines_list):
     for x in saved_rows[len(turbines_list)+3:len(turbines_list)+7]:
         time_to_units_block.append(x)
     data_available_wtg_no = [] #block of data availability and turbines list not in order
-    for x in saved_rows[len(turbines_list)+8:len(turbines_list)+17]:
-        data_available_wtg_no.append(x)
+    for y in saved_rows[len(turbines_list)+7:len(turbines_list)*3+7]:
+        data_available_wtg_no.append(y)
+    print(repr(data_available_wtg_no[0]))
+    print(repr(f'{turbines_list[0]}\n'))
 
 
     for element in turbines_list:
         nameOfTurbine = f'MV_for_{element.replace("/", "_")}'
         nextfileWTG = open(nameOfTurbine, "w+")
-
         nextfileWTG.writelines(saved_rows[0:3])
         nextfileWTG.writelines(element + '\n')
         nextfileWTG.writelines(time_to_units_block)
         #for element in  #create loop tubine +data available not the same order as turbineslist
-        nextfileWTG.writelines(data_available_wtg_no)
+        for wtg in data_available_wtg_no:
+             if wtg == f'{element}\n':
+                print(f'{element}\n')
+                print(data_available_wtg_no)
+                #nextfileWTG.writelines(data_available_wtg_no)
+                nextfileWTG.writelines(wtg)
+                nextfileWTG.writelines(data_available_wtg_no[
+                                           data_available_wtg_no.index(wtg)+1
+                                       ])
+                break
 
 
 
@@ -65,7 +76,6 @@ def MeasureValues(saved_rows, turbines_list):
 
 
         nextfileWTG.close()
-
 
     print("function work MV")
 
