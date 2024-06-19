@@ -35,7 +35,6 @@ def Wtg_list(saved_rows):
     return turbines_list
 
 
-
 turbines_list = Wtg_list(saved_rows)
 #check end of turbines list
 print(turbines_list)

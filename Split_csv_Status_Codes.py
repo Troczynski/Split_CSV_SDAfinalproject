@@ -31,7 +31,6 @@ start_Status_codes_for = []
 
 turbines_list = []
 
-
 def StatusCode(saved_rows, turbines_list):
     pass
 

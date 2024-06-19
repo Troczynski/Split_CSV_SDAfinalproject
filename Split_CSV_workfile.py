@@ -1,5 +1,3 @@
-
-
 #3rd block of fixed lines with additional data such as time period, creator and units"""
 if __name__ == "__main__":
     turbine = ["wtg1", "wtg2", "wtg3", "wt4"]
@@ -11,6 +9,7 @@ if __name__ == "__main__":
 import csv
 from Split_csv_Measured_values import saved_rows, turbines_list
 
+#rewrite code of Split SC to functions here
 
 def StatusCode(saved_rows, turbines_list):
     i = 0
