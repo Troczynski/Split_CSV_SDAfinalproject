@@ -1,4 +1,4 @@
-import pandas as pd
+
 import csv
 #import Split_csv_Status_Codes
 from re import search
@@ -8,7 +8,8 @@ from re import search
 #dostajemy csieżkę pliku do dir big file All.csv
 a = "All.csv"
 b = "ALL_LDK_GRB_SC_30-04.04.23.csv"
-dir_big_file = open(b, "r")
+c ="SDA_ALL_BUK_MV.csv"
+dir_big_file = open(c, "r")
 
 #sprawdzamy rodzaj pliku
 saved_rows = []
@@ -32,16 +33,24 @@ def Wtg_list(saved_rows):
         start_Status_codes_for.append(sc)
     return turbines_list
 
+
+
 turbines_list = Wtg_list(saved_rows)
 #check end of turbines list
-
+print(f' dlugosc listy turbin 3 + (dlugosc){len(turbines_list)}')
 
 
 def MeasureValues(saved_rows, turbines_list):
+    time_to_units_block = len(turbines_list) + 4 #setup 1st line after turbines list
     for element in turbines_list:
-        nameOfTurbine = element.replace("/", "_")
+        nameOfTurbine = f'MV_for_{element.replace("/", "_")}'
         nextfileWTG = open(nameOfTurbine, "w+")
-        nextfileWTG.write()
+
+        nextfileWTG.writelines(saved_rows[0:3])
+        nextfileWTG.writelines(element)
+        nextfileWTG.writelines(saved_rows[len(turbines_list)+3:len(turbines_list)+7])
+
+
 
 
         nextfileWTG.close()
@@ -62,7 +71,7 @@ def StatusCode(self):
 
 #app choose type of file SC or MV
 if saved_rows[1] == sgre_measured_values:
-    MeasureValues(saved_rows)
+    MeasureValues(saved_rows, turbines_list)
 elif saved_rows[1] == sgre_status_code:
     StatusCode(saved_rows)
 else:
