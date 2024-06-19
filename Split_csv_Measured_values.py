@@ -49,10 +49,11 @@ def MeasureValues(saved_rows, turbines_list):
         data_available_wtg_no.append(y)
 
 
+
     for element in turbines_list:
-        nameOfTurbine = f'MV_for_{element.replace("/", "_")}.csv'
-        nextfileWTG = open(nameOfTurbine, "w+")
-        nextfileWTG.writelines(saved_rows[0:3])
+        nameOfTurbine = f'MV_for_{element.replace("/", "_")}.csv' #create name of the file based on wtg
+        nextfileWTG = open(nameOfTurbine, "w+") #create and open file(singular wtg)
+        nextfileWTG.writelines(saved_rows[0:3]) #save 1st fixed block of text
         nextfileWTG.writelines(element + '\n')
         nextfileWTG.writelines(time_to_units_block)
         #for element in  #create loop tubine +data available not the same order as turbineslist
@@ -70,30 +71,17 @@ def MeasureValues(saved_rows, turbines_list):
         nextfileWTG.writelines(saved_rows[len(turbines_list)*3+8]) # timestamp line
         #create loop with data based on wtg number
         # time stam to ";" first line which is an index of line to start in next iteration
-        nextfileWTG.writelines(saved_rows[len(turbines_list)*3+9:])
-        #for dataline in saved_rows[len(turbines_list)*3+8:100]:
-        start_index_data = len(turbines_list)*3+9
-        end_index_data = len(turbines_list)*3+9
-        for el in saved_rows[len(turbines_list)*3+9:]:
+        nextfileWTG.writelines(saved_rows[len(turbines_list) * 3 + 9:])
+        # for dataline in saved_rows[len(turbines_list)*3+8:100]:
 
+        start_index_data = len(turbines_list) * 3 + 9
+        end_index_data = 0
+        mv_data = saved_rows[start_index_data:end_index_data]
+        for el in saved_rows[len(turbines_list) * 3 + 9:]:
             if str(el)[0:1] != ";":
                 nextfileWTG.writelines(el)
             else:
                 end_index_data = len(el)
-
-
-
-                break
-
-
-
-
-
-
-
-
-
-
 
         nextfileWTG.close()
 
