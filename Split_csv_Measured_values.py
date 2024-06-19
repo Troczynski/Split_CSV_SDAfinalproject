@@ -41,11 +41,11 @@ turbines_list = Wtg_list(saved_rows)
 
 def MeasureValues(saved_rows, turbines_list):
 
-    time_to_units_block = [saved_rows[len(turbines_list)+3],
-             saved_rows[len(turbines_list)+4],
-             saved_rows[len(turbines_list)+5],
-             saved_rows[len(turbines_list)+6],
-             ] #3rd block of fixed lines with additional data such as time period, creator and units
+
+    time_to_units_block = []
+    for x in saved_rows[len(turbines_list)+3:len(turbines_list)+7]:
+        list1.append(x)
+    print(list1)
     for element in turbines_list:
         nameOfTurbine = f'MV_for_{element.replace("/", "_")}'
         nextfileWTG = open(nameOfTurbine, "w+")
@@ -53,7 +53,9 @@ def MeasureValues(saved_rows, turbines_list):
         nextfileWTG.writelines(saved_rows[0:3])
         nextfileWTG.writelines(element + '\n')
         nextfileWTG.writelines(time_to_units_block)
-        #nextfileWTG.writelines(saved_rows[len(turbines_list)+3:len(turbines_list)+7])
+        #for element in  #create loop tubine +data available not the same order as turbineslist
+
+
 
 
 
