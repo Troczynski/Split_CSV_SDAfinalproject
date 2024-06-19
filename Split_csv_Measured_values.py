@@ -76,7 +76,7 @@ def MeasureValues(saved_rows, turbines_list):
         for el in saved_rows[len(turbines_list)*3+9:]:
 
             if str(el)[0:1] == ";":
-                end_index_data += el.index()
+                end_index_data = len(el)
 
 
 
