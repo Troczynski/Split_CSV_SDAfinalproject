@@ -9,7 +9,7 @@ a = "All.csv"
 b = "ALL_LDK_GRB_SC_30-04.04.23.csv"
 c = "SDA_ALL_BUK_MV.csv"
 d = "SDA ALL GZK WTG MV.csv"
-dir_big_file = open(d, "r")
+dir_big_file = open(c, "r")
 
 #sprawdzamy rodzaj pliku
 saved_rows = []
@@ -72,10 +72,13 @@ def MeasureValues(saved_rows, turbines_list):
         # time stam to ";" first line which is an index of line to start in next iteration
         nextfileWTG.writelines(saved_rows[len(turbines_list)*3+9:])
         #for dataline in saved_rows[len(turbines_list)*3+8:100]:
+        start_index_data = len(turbines_list)*3+9
         end_index_data = len(turbines_list)*3+9
         for el in saved_rows[len(turbines_list)*3+9:]:
 
-            if str(el)[0:1] == ";":
+            if str(el)[0:1] != ";":
+                nextfileWTG.writelines(el)
+            else:
                 end_index_data = len(el)
 
 
