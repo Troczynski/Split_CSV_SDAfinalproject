@@ -4,6 +4,7 @@ functions with 2 params input file and amount of turbines /split sections
 aaa
 
 """
+
 import csv
 #import Split_csv_Measured_values
 
@@ -30,6 +31,9 @@ start_Status_codes_for = []
 
 turbines_list = []
 
+
+def StatusCode(saved_rows, turbines_list):
+    pass
 
 
 for row in saved_rows[3:end]:
