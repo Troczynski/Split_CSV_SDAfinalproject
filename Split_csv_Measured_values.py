@@ -2,6 +2,7 @@
 import csv
 #import Split_csv_Status_Codes
 from re import search
+#from workfile import StatusCode
 
 #dostajemy csieżkę pliku do dir big file All.csv
 
@@ -9,7 +10,7 @@ a = "All.csv"
 b = "ALL_LDK_GRB_SC_30-04.04.23.csv"
 c = "SDA_ALL_BUK_MV.csv"
 d = "SDA ALL GZK WTG MV.csv"
-dir_big_file = open(c, "r")
+dir_big_file = open(b, "r")
 
 #sprawdzamy rodzaj pliku
 saved_rows = []
@@ -37,7 +38,7 @@ def Wtg_list(saved_rows):
 
 turbines_list = Wtg_list(saved_rows)
 #check end of turbines list
-
+print(turbines_list)
 
 def MeasureValues(saved_rows, turbines_list):
 
@@ -91,7 +92,7 @@ def MeasureValues(saved_rows, turbines_list):
 
 
 
-def StatusCode(self):
+def StatusCode(saved_rows, turbines_list):
     print('function work SC')
     #return Split_csv_Status_Codes
 
@@ -103,7 +104,7 @@ def StatusCode(self):
 if saved_rows[1] == sgre_measured_values:
     MeasureValues(saved_rows, turbines_list)
 elif saved_rows[1] == sgre_status_code:
-    StatusCode(saved_rows)
+    StatusCode(saved_rows, turbines_list)
 else:
     print("please check if the file contain Status codes or Measured Values")
 

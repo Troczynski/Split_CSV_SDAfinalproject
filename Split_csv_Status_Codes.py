@@ -35,14 +35,14 @@ turbines_list = []
 def StatusCode(saved_rows, turbines_list):
     pass
 
-
+#not used in final version variable end(input) was replaced by function from measured values
 for row in saved_rows[3:end]:
     start = [f'Status codes for  {str(row)[2:-2]}']
-    print(str(row)[2:-2])
     start1 = [f'{str(row)[2:-2]}']
     start_Status_codes_for.append(start)
     turbines_list.append(start1)
 
+print(repr(turbines_list))
 
 print(start_Status_codes_for)
 print(turbines_list)
