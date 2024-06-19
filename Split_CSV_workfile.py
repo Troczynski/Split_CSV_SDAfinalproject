@@ -1,12 +1,12 @@
 
 
 #3rd block of fixed lines with additional data such as time period, creator and units"""
+if __name__ == "__main__":
+    turbine = ["wtg1", "wtg2", "wtg3", "wt4"]
 
-turbine = ["wtg1", "wtg2", "wtg3", "wt4"]
-
-data = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-for el in turbine:
-    print("1")
+    data = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    for el in turbine:
+        print("1")
 
 import csv
 from Split_csv_Measured_values import saved_rows, turbines_list
