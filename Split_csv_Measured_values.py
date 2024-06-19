@@ -77,11 +77,12 @@ def MeasureValues(saved_rows, turbines_list):
         start_index_data = len(turbines_list) * 3 + 9
         end_index_data = 0
         mv_data = saved_rows[start_index_data:end_index_data]
-        for el in saved_rows[len(turbines_list) * 3 + 9:]:
+        for el in saved_rows[start_index_data:]:
             if str(el)[0:1] != ";":
                 nextfileWTG.writelines(el)
             else:
-                end_index_data = len(el)
+                start_index_data = len(el)
+            break
 
         nextfileWTG.close()
 
