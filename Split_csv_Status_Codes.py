@@ -30,7 +30,7 @@ aaa
 
 def StatusCode(saved_rows, turbines_list):
     time_to_units_block = []  # 3rd block of fixed lines with additional data such as time period, creator and units
-    for x in saved_rows[len(turbines_list) + 3:len(turbines_list) + 6]:
+    for x in saved_rows[len(turbines_list) + 3:len(turbines_list) + 5]:
         time_to_units_block.append(x)
     start_Status_codes_for = []  # block of data availability and turbines list not in order 3* due to turbines list is iterat 2 times and one time data vailable
     for row in saved_rows[3:len(turbines_list)+3]:
@@ -38,17 +38,31 @@ def StatusCode(saved_rows, turbines_list):
         start_Status_codes_for.append(start)
 
     print(start_Status_codes_for)
+
+    start_s = saved_rows.index(start_Status_codes_for[0])
+    end_s = saved_rows.index(start_Status_codes_for[1])
+    i = 0
+
     for element in turbines_list:
+        start_s = saved_rows.index(start_Status_codes_for[i])
+        try:
+            end_s = saved_rows.index(start_Status_codes_for[i + 1])
+        except IndexError:(
+            end_s) = len(saved_rows)
         nameOfTurbine = f'SC_for_{element.replace("/", "_")}.csv'  # create name of the file based on wtg
         nextfileWTG = open(nameOfTurbine, "w+")  # create and open file(singular wtg)
         nextfileWTG.writelines(saved_rows[0:3])  # save 1st fixed block of text
         nextfileWTG.writelines(element + '\n')
         nextfileWTG.writelines(time_to_units_block)
+
+        nextfileWTG.writelines(saved_rows[start_s:end_s])
+
         #status code for line
         #units line
 
 
         nextfileWTG.close()
+        i += 1
 
 
 
