@@ -21,7 +21,6 @@ dir_big_file.close()
 
 sgre_measured_values = '10 Minute Values, detailed\n'
 sgre_status_code = 'Status code list\n'
-print(f'saved rows from Verified file {repr(saved_rows1[1:3])}')
 def wtg_list(saved_rows):
     turbines_list1 = []
     start_status_codes_for = []
@@ -36,7 +35,7 @@ def wtg_list(saved_rows):
     return turbines_list1
 
 turbines_list = wtg_list(saved_rows1)
-print(turbines_list)
+
 data_lines_per_WTG = Split_csv_Measured_values.TimePeriod(saved_rows1, turbines_list)
 
 # app choose type of file SC or MV
