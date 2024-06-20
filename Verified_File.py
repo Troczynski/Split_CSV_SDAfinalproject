@@ -1,16 +1,16 @@
 # choose wich splitter
 import Split_csv_Measured_values
-import Split_csv_Status_Codes
-import Split_csv_Status_Codes_copy
+
+import Split_csv_Status_Codes_all
 
 a = "All.csv"
-b = "ALL_LDK_GRB_SC_30-04.04.23.csv"
+path_of_the_file = "ALL_LDK_GRB_SC_30-04.04.23.csv"
 c = "SDA_ALL_BUK_MV.csv"
 d = "SDA ALL GZK WTG MV.csv"
 e = "ALL_LDK_GRB_MV_30-04.04.23.csv"
 f = "SDA_LDK01_03_MV18.06_20.06.csv"
-final_test = "SDA_ALL_GZK_MV14_20.06.csv"
-dir_big_file = open(b, "r")
+dire = "SDA_ALL_GZK_MV14_20.06.csv"
+dir_big_file = open(path_of_the_file, "r")
 
 # sprawdzamy rodzaj pliku
 saved_rows1 = []
@@ -43,7 +43,8 @@ data_lines_per_WTG = Split_csv_Measured_values.TimePeriod(saved_rows1, turbines_
 if saved_rows1[1] == sgre_measured_values:
     Split_csv_Measured_values.MeasureValues(saved_rows1, turbines_list,data_lines_per_WTG)
 elif saved_rows1[1] == sgre_status_code:
-    Split_csv_Status_Codes.StatusCode(saved_rows1, turbines_list)
+    Split_csv_Status_Codes_all.StatusCodesAll(turbines_list,path_of_the_file)
+
 
 else:
     print("please check if the file contain Status codes or Measured Values")

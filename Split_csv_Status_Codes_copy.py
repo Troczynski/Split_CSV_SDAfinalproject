@@ -4,7 +4,7 @@ functions with 2 params input file and amount of turbines /split sections
 aaa
 
 """
-from Verified_File import wtg_list
+
 
 import csv
 #import Split_csv_Measured_values
@@ -17,33 +17,38 @@ csvfile = open(dir_big_file, "r", newline="\r\n")
 bigfile = csv.reader(csvfile, delimiter=';', quotechar='|')
 
 #SAVED ALL LINES OF FILE IN LIST
-saved_rows2 = []
+saved_rows3 = []
 
 for row in bigfile:
-    saved_rows2.append(row)
+    saved_rows3.append(row)
 
 csvfile.close()
 #CLOSED FILE WITH MULTIPLE TURBINES WORKING WITH SEPERATE_ROWS LIST
-print(print(f'saved rows from Split SC COPY: {repr(saved_rows2[1:3])}'))
+print(print(f'saved rows from Split SC COPY: {repr(saved_rows3[1:3])}'))
 
-end = int(input("number of turbines/ section to split: ")) + 3
 
-start_Status_codes_for = []
 
-turbines_list = []
+
+
+
 
 def StatusCode(saved_rows2, turbines_list):
+    end = int(input("number of turbines/ section to split: ")) + 3
+    print(f' to jest wpisane z łay:{end}')
+    print(f' a to jest z listy: {len(turbines_list)+3}')
+    turbines_list1 = []
+    start_Status_codes_for = []
 #not used in final version variable end(input) was replaced by function from measured values
     for row in saved_rows2[3:end]:
         start = [f'Status codes for  {str(row)[2:-2]}']
-        start1 = [f'{str(row)[2:-2]}']
+        start1 = [f'{str(row)[2:-2]}'] #dopasować strin z SC do string Vfiled \n
         start_Status_codes_for.append(start)
-        turbines_list.append(start1)
+        turbines_list1.append(start1)
 
     print(repr(turbines_list))
 
-    print(start_Status_codes_for)
-    print(turbines_list)
+    print(repr(start_Status_codes_for[0]))
+    print(repr(turbines_list[0]))
 
     start_s = saved_rows2.index(start_Status_codes_for[0])
     end_s = saved_rows2.index(start_Status_codes_for[1])
@@ -67,4 +72,4 @@ def StatusCode(saved_rows2, turbines_list):
         new1.close()
         i += 1
 
-
+StatusCode(saved_rows3,turbines_list1)

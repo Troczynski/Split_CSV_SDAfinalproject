@@ -37,7 +37,7 @@ def StatusCode(saved_rows, turbines_list):
         start = f'Status codes for  {str(row)[:-1]}\n'
         start_Status_codes_for.append(start)
 
-    print(start_Status_codes_for)
+    print(repr(start_Status_codes_for[0:3]))
 
     start_s = saved_rows.index(start_Status_codes_for[0])
     end_s = saved_rows.index(start_Status_codes_for[1])
