@@ -26,9 +26,6 @@ def StatusCodesAll(turbines_list, file_directory):
     #CLOSED FILE WITH MULTIPLE TURBINES WORKING WITH SEPERATE_ROWS LIST
 
     end = len(turbines_list)+3
-    print(end)
-
-    end = int(input("number of turbines/ section to split: ")) + 3
 
     start_Status_codes_for = []
 
@@ -43,10 +40,6 @@ def StatusCodesAll(turbines_list, file_directory):
         start_Status_codes_for.append(start)
         turbines_list.append(start1)
 
-    print(repr(turbines_list))
-
-    print(start_Status_codes_for)
-    print(turbines_list)
 
     start_s = saved_rows.index(start_Status_codes_for[0])
     end_s = saved_rows.index(start_Status_codes_for[1])
