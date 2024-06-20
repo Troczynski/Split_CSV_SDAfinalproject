@@ -4,8 +4,8 @@ import Split_csv_Measured_values
 import Split_csv_Status_Codes
 
 a = "All.csv"
-#path_of_the_file = "ALL_LDK_GRB_SC_30-04.04.23.csv"
-path_of_the_file = "C:\Users\piotr.troczynski\Downloads\SDA_ALL_GZK_MV14_20.06.csv"
+path_of_the_file = "ALL_LDK_GRB_SC_30-04.04.23.csv"
+
 
 
 c = "SDA_ALL_BUK_MV.csv"
