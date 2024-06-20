@@ -1,5 +1,6 @@
-
 import csv
+from datetime import datetime, timedelta
+
 # import Split_csv_Status_Codes
 
 # from workfile import StatusCode
@@ -12,7 +13,7 @@ c = "SDA_ALL_BUK_MV.csv"
 d = "SDA ALL GZK WTG MV.csv"
 e = "ALL_LDK_GRB_MV_30-04.04.23.csv"
 f = "SDA_LDK01_03_MV18.06_20.06.csv"
-dir_big_file = open(a, "r")
+dir_big_file = open(b, "r")
 
 # sprawdzamy rodzaj pliku
 saved_rows = []
@@ -26,7 +27,6 @@ sgre_status_code = 'Status code list\n'
 
 
 def wtg_list(saved_rows):
-
     turbines_list = []
     start_status_codes_for = []
 
@@ -39,29 +39,33 @@ def wtg_list(saved_rows):
         start_status_codes_for.append(sc)
     return turbines_list
 
+
 def TimePeriod(saved_rows, turbines_list):
-    start_date = str(saved_rows[len(turbines_list) +3])[13:23]
-    end_date = str(saved_rows[len(turbines_list) +3])[26:35]
-    list = [start_date, end_date]
-    return list
+    str_start_date = str(saved_rows[len(turbines_list) + 3])[13:23]
+    str_end_date = str(saved_rows[len(turbines_list) + 3])[26:36]
+    start_date = datetime.strptime(str_start_date, "%d/%m/%Y").date()
+    end_date = datetime.strptime(str_end_date, "%d/%m/%Y").date()
+    timedelta = (end_date - start_date).days
+    data_lines_number = 144 + 144 * timedelta
 
-
+    return data_lines_number
 
 
 turbines_list = wtg_list(saved_rows)
 
 # check end of turbines list
-timeTEST = TimePeriod(saved_rows,turbines_list)
+timeTEST = TimePeriod(saved_rows, turbines_list)
 print(repr(timeTEST))
 timeTEST2 = TimePeriod(saved_rows, turbines_list)
 print(repr(timeTEST2))
-def MeasureValues(saved_rows, turbines_list):
 
-    time_to_units_block = [] #3rd block of fixed lines with additional data such as time period, creator and units
-    for x in saved_rows[len(turbines_list)+3:len(turbines_list)+7]:
+
+def MeasureValues(saved_rows, turbines_list):
+    time_to_units_block = []  # 3rd block of fixed lines with additional data such as time period, creator and units
+    for x in saved_rows[len(turbines_list) + 3:len(turbines_list) + 7]:
         time_to_units_block.append(x)
-    data_available_wtg_no = [] #block of data availability and turbines list not in order 3* due to turbines list is iterat 2 times and one time data vailable
-    for y in saved_rows[len(turbines_list)+7:len(turbines_list)*3+7]:
+    data_available_wtg_no = []  # block of data availability and turbines list not in order 3* due to turbines list is iterat 2 times and one time data vailable
+    for y in saved_rows[len(turbines_list) + 7:len(turbines_list) * 3 + 7]:
         data_available_wtg_no.append(y)
 
     tiemperiod = 144
@@ -71,39 +75,34 @@ def MeasureValues(saved_rows, turbines_list):
         turbines_list) * 3 + 9 + tiemperiod  # zamiast 144 to ilośc dni razy 144 uwaga dodać lenturbines bo to się zmienia!
     print(start_index_data, end_index_data)
 
-
-
     for element in turbines_list:
-        nameOfTurbine = f'MV_for_{element.replace("/", "_")}.csv' #create name of the file based on wtg
-        nextfileWTG = open(nameOfTurbine, "w+") #create and open file(singular wtg)
-        nextfileWTG.writelines(saved_rows[0:3]) #save 1st fixed block of text
+        nameOfTurbine = f'MV_for_{element.replace("/", "_")}.csv'  # create name of the file based on wtg
+        nextfileWTG = open(nameOfTurbine, "w+")  # create and open file(singular wtg)
+        nextfileWTG.writelines(saved_rows[0:3])  # save 1st fixed block of text
         nextfileWTG.writelines(element + '\n')
         nextfileWTG.writelines(time_to_units_block)
-# for element in  #create loop tubine +data available not the same order as turbineslist
+        # for element in  #create loop tubine +data available not the same order as turbineslist
         for wtg in data_available_wtg_no:
-             if wtg == f'{element}\n':
+            if wtg == f'{element}\n':
                 nextfileWTG.writelines(wtg)
                 nextfileWTG.writelines(data_available_wtg_no[
-                                           data_available_wtg_no.index(wtg)+1
-                                       ])
+                                           data_available_wtg_no.index(wtg) + 1
+                                           ])
                 break
         nextfileWTG.writelines('\n')
-        nextfileWTG.writelines(saved_rows[len(turbines_list)*3+8]) # timestamp line
-# create loop with data based on wtg number
-# time stam to ";" first line which is an index of line to start in next iteration
-# for dataline in saved_rows[len(turbines_list)*3+8:100]:
-
-
-
+        nextfileWTG.writelines(saved_rows[len(turbines_list) * 3 + 8])  # timestamp line
+        # create loop with data based on wtg number
+        # time stam to ";" first line which is an index of line to start in next iteration
+        # for dataline in saved_rows[len(turbines_list)*3+8:100]:
 
         nextfileWTG.writelines(saved_rows[start_index_data:end_index_data])
         start_index_data += tiemperiod
-        start_index_data += 1 #lineseparator
+        start_index_data += 1  # lineseparator
         end_index_data += tiemperiod
-        end_index_data += 1 #lineseparator
+        end_index_data += 1  # lineseparator
         print(start_index_data, end_index_data)
 
-# mv_data = saved_rows[start_index_data:end_index_data]
+        # mv_data = saved_rows[start_index_data:end_index_data]
         # for el in saved_rows[start_index_data:]:
         #     print(el[0])
         #
@@ -120,13 +119,12 @@ def MeasureValues(saved_rows, turbines_list):
     print("function work MV")
 
 
-
-
 def StatusCode(saved_rows, turbines_list):
     print('function work SC')
-# return Split_csv_Status_Codes
+    # return Split_csv_Status_Codes
 
     pass
+
 
 # app choose type of file SC or MV
 if saved_rows[1] == sgre_measured_values:
