@@ -94,9 +94,14 @@ def MeasureValues(saved_rows, turbines_list):
 # for dataline in saved_rows[len(turbines_list)*3+8:100]:
 
 
-        print(start_index_data, end_index_data)
+
 
         nextfileWTG.writelines(saved_rows[start_index_data:end_index_data])
+        start_index_data += tiemperiod
+        start_index_data += 1 #lineseparator
+        end_index_data += tiemperiod
+        end_index_data += 1 #lineseparator
+        print(start_index_data, end_index_data)
 
 # mv_data = saved_rows[start_index_data:end_index_data]
         # for el in saved_rows[start_index_data:]:
