@@ -13,7 +13,8 @@ c = "SDA_ALL_BUK_MV.csv"
 d = "SDA ALL GZK WTG MV.csv"
 e = "ALL_LDK_GRB_MV_30-04.04.23.csv"
 f = "SDA_LDK01_03_MV18.06_20.06.csv"
-dir_big_file = open(c, "r")
+final_test = "SDA_ALL_BUK_GZK_MV.csv"
+dir_big_file = open(final_test, "r")
 
 # sprawdzamy rodzaj pliku
 saved_rows = []
@@ -127,7 +128,7 @@ def StatusCode(saved_rows, turbines_list):
 
 # app choose type of file SC or MV
 if saved_rows[1] == sgre_measured_values:
-    MeasureValues(saved_rows, turbines_list)
+    MeasureValues(saved_rows, turbines_list,data_lines_per_WTG)
 elif saved_rows[1] == sgre_status_code:
     StatusCode(saved_rows, turbines_list)
 else:
