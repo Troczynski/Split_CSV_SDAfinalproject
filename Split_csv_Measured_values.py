@@ -54,7 +54,7 @@ def MeasureValues(saved_rows, turbines_list):
         data_available_wtg_no.append(y)
 
     start_index_data = len(turbines_list) * 3 + 9
-    end_index_data = 144 #zamiast 144 to ilośc dni razy 144
+    end_index_data = 144 #zamiast 144 to ilośc dni razy 144 uwaga dodać lenturbines bo to się zmienia!
 
 
     for element in turbines_list:
