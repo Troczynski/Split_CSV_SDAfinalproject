@@ -13,7 +13,7 @@ c = "SDA_ALL_BUK_MV.csv"
 d = "SDA ALL GZK WTG MV.csv"
 e = "ALL_LDK_GRB_MV_30-04.04.23.csv"
 f = "SDA_LDK01_03_MV18.06_20.06.csv"
-final_test = "SDA_ALL_BUK_GZK_MV.csv"
+final_test = "SDA_ALL_GZK_MV14_20.06.csv"
 dir_big_file = open(final_test, "r")
 
 # sprawdzamy rodzaj pliku
@@ -54,13 +54,10 @@ def TimePeriod(saved_rows, turbines_list):
 
 turbines_list = wtg_list(saved_rows)
 
-# check end of turbines list
 data_lines_per_WTG = TimePeriod(saved_rows, turbines_list)
-print(f'ilość wierszy 1440 to jeden dzien {data_lines_per_WTG}')
-
-
 
 def MeasureValues(saved_rows, turbines_list, number_of_lines):
+#    below 2 variables with blocks of lines - app more efficient
     time_to_units_block = []  # 3rd block of fixed lines with additional data such as time period, creator and units
     for x in saved_rows[len(turbines_list) + 3:len(turbines_list) + 7]:
         time_to_units_block.append(x)
@@ -72,7 +69,7 @@ def MeasureValues(saved_rows, turbines_list, number_of_lines):
 
     start_index_data = len(turbines_list) * 3 + 9
     end_index_data = len(
-        turbines_list) * 3 + 9 + number_of_lines  # zamiast 144 to ilośc dni razy 144 uwaga dodać lenturbines bo to się zmienia!
+        turbines_list) * 3 + 9 + number_of_lines
     print(start_index_data, end_index_data)
 
     for element in turbines_list:
@@ -91,32 +88,16 @@ def MeasureValues(saved_rows, turbines_list, number_of_lines):
                 break
         nextfileWTG.writelines('\n')
         nextfileWTG.writelines(saved_rows[len(turbines_list) * 3 + 8])  # timestamp line
-        # create loop with data based on wtg number
-        # time stam to ";" first line which is an index of line to start in next iteration
-        # for dataline in saved_rows[len(turbines_list)*3+8:100]:
+        # data copy based on index of lines in saved_rows. Every 24 hours has 144 lines of data (number of lines)
 
         nextfileWTG.writelines(saved_rows[start_index_data:end_index_data])
         start_index_data += number_of_lines
         start_index_data += 1  # lineseparator
         end_index_data += number_of_lines
         end_index_data += 1  # lineseparator
-        print(start_index_data, end_index_data)
 
-        # mv_data = saved_rows[start_index_data:end_index_data]
-        # for el in saved_rows[start_index_data:]:
-        #     print(el[0])
-        #
-        #     if el[0] != ";":
-        #         nextfileWTG.writelines(el)
-        #
-        #     else:
-        #         start_index_data = len(el)
-        #         break
-        #     break
 
         nextfileWTG.close()
-
-    print("function work MV")
 
 
 def StatusCode(saved_rows, turbines_list):
