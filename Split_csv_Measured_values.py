@@ -12,7 +12,7 @@ c = "SDA_ALL_BUK_MV.csv"
 d = "SDA ALL GZK WTG MV.csv"
 e = "ALL_LDK_GRB_MV_30-04.04.23.csv"
 f = "SDA_LDK01_03_MV18.06_20.06.csv"
-dir_big_file = open(f, "r")
+dir_big_file = open(a, "r")
 
 # sprawdzamy rodzaj pliku
 saved_rows = []
@@ -39,11 +39,22 @@ def wtg_list(saved_rows):
         start_status_codes_for.append(sc)
     return turbines_list
 
+def TimePeriod(saved_rows, turbines_list):
+    start_date = str(saved_rows[len(turbines_list) +3])[13:23]
+    end_date = str(saved_rows[len(turbines_list) +3])[26:35]
+    list = [start_date, end_date]
+    return list
+
+
+
 
 turbines_list = wtg_list(saved_rows)
+
 # check end of turbines list
-
-
+timeTEST = TimePeriod(saved_rows,turbines_list)
+print(repr(timeTEST))
+timeTEST2 = TimePeriod(saved_rows, turbines_list)
+print(repr(timeTEST2))
 def MeasureValues(saved_rows, turbines_list):
 
     time_to_units_block = [] #3rd block of fixed lines with additional data such as time period, creator and units
@@ -53,8 +64,13 @@ def MeasureValues(saved_rows, turbines_list):
     for y in saved_rows[len(turbines_list)+7:len(turbines_list)*3+7]:
         data_available_wtg_no.append(y)
 
+    tiemperiod = 144
+
     start_index_data = len(turbines_list) * 3 + 9
-    end_index_data = 144 #zamiast 144 to ilośc dni razy 144 uwaga dodać lenturbines bo to się zmienia!
+    end_index_data = len(
+        turbines_list) * 3 + 9 + tiemperiod  # zamiast 144 to ilośc dni razy 144 uwaga dodać lenturbines bo to się zmienia!
+    print(start_index_data, end_index_data)
+
 
 
     for element in turbines_list:
@@ -77,6 +93,9 @@ def MeasureValues(saved_rows, turbines_list):
 # time stam to ";" first line which is an index of line to start in next iteration
 # for dataline in saved_rows[len(turbines_list)*3+8:100]:
 
+
+        print(start_index_data, end_index_data)
+
         nextfileWTG.writelines(saved_rows[start_index_data:end_index_data])
 
 # mv_data = saved_rows[start_index_data:end_index_data]
@@ -90,10 +109,7 @@ def MeasureValues(saved_rows, turbines_list):
         #         start_index_data = len(el)
         #         break
         #     break
-        start_index_data += 144*3 #doba danych zamieć na zmienną ilość dni*144
-        start_index_data += 1
-        end_index_data += 144*3 # dlaczego ucina do 120 powinno być 144
-        end_index_data += 1
+
         nextfileWTG.close()
 
     print("function work MV")
