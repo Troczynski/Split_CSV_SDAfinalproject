@@ -34,7 +34,7 @@ def StatusCode(saved_rows, turbines_list):
         time_to_units_block.append(x)
     start_Status_codes_for = []  # block of data availability and turbines list not in order 3* due to turbines list is iterat 2 times and one time data vailable
     for row in saved_rows[3:len(turbines_list)+3]:
-        start = f'Status codes for  {str(row)[:-2]}'
+        start = f'Status codes for  {str(row)[:-1]}\n'
         start_Status_codes_for.append(start)
 
     print(start_Status_codes_for)
@@ -44,7 +44,8 @@ def StatusCode(saved_rows, turbines_list):
     i = 0
 
     for element in turbines_list:
-        start_s = saved_rows.index(start_Status_codes_for[i])
+
+        start_s = saved_rows.index(start_Status_codes_for[element])
         try:
             end_s = saved_rows.index(start_Status_codes_for[i + 1])
         except IndexError:(
