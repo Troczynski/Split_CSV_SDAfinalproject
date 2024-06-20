@@ -7,38 +7,38 @@ from datetime import datetime, timedelta
 
 # dostajemy csieżkę pliku do dir big file All.csv
 
-a = "All.csv"
-b = "ALL_LDK_GRB_SC_30-04.04.23.csv"
-c = "SDA_ALL_BUK_MV.csv"
-d = "SDA ALL GZK WTG MV.csv"
-e = "ALL_LDK_GRB_MV_30-04.04.23.csv"
-f = "SDA_LDK01_03_MV18.06_20.06.csv"
-final_test = "SDA_ALL_GZK_MV14_20.06.csv"
-dir_big_file = open(final_test, "r")
+# a = "All.csv"
+# b = "ALL_LDK_GRB_SC_30-04.04.23.csv"
+# c = "SDA_ALL_BUK_MV.csv"
+# d = "SDA ALL GZK WTG MV.csv"
+# e = "ALL_LDK_GRB_MV_30-04.04.23.csv"
+# f = "SDA_LDK01_03_MV18.06_20.06.csv"
+# final_test = "SDA_ALL_GZK_MV14_20.06.csv"
+# dir_big_file = open(final_test, "r")
 
 # sprawdzamy rodzaj pliku
-saved_rows = []
-for row in dir_big_file:
-    saved_rows.append(row)
+# saved_rows = []
+# for row in dir_big_file:
+#     saved_rows.append(row)
+#
+# dir_big_file.close()
+#
+# sgre_measured_values = '10 Minute Values, detailed\n'
+# sgre_status_code = 'Status code list\n'
 
-dir_big_file.close()
 
-sgre_measured_values = '10 Minute Values, detailed\n'
-sgre_status_code = 'Status code list\n'
-
-
-def wtg_list(saved_rows):
-    turbines_list = []
-    start_status_codes_for = []
-
-    time_period = "time period:"
-    for el in saved_rows[3:]:
-        if str(el)[0:12] == time_period:
-            break
-        turbines_list.append(el[:-1])
-        sc = [f'Status codes for  {el[:-1]}']
-        start_status_codes_for.append(sc)
-    return turbines_list
+# def wtg_list(saved_rows):
+#     turbines_list = []
+#     start_status_codes_for = []
+#
+#     time_period = "time period:"
+#     for el in saved_rows[3:]:
+#         if str(el)[0:12] == time_period:
+#             break
+#         turbines_list.append(el[:-1])
+#         sc = [f'Status codes for  {el[:-1]}']
+#         start_status_codes_for.append(sc)
+#     return turbines_list
 
 
 def TimePeriod(saved_rows, turbines_list):
@@ -52,9 +52,9 @@ def TimePeriod(saved_rows, turbines_list):
     return data_lines_number
 
 
-turbines_list = wtg_list(saved_rows)
+#turbines_list = wtg_list(saved_rows)
 
-data_lines_per_WTG = TimePeriod(saved_rows, turbines_list)
+
 
 def MeasureValues(saved_rows, turbines_list, number_of_lines):
 #    below 2 variables with blocks of lines - app more efficient
@@ -66,11 +66,9 @@ def MeasureValues(saved_rows, turbines_list, number_of_lines):
         data_available_wtg_no.append(y)
 
 
-
     start_index_data = len(turbines_list) * 3 + 9
     end_index_data = len(
         turbines_list) * 3 + 9 + number_of_lines
-    print(start_index_data, end_index_data)
 
     for element in turbines_list:
         nameOfTurbine = f'MV_for_{element.replace("/", "_")}.csv'  # create name of the file based on wtg
@@ -108,9 +106,9 @@ def StatusCode(saved_rows, turbines_list):
 
 
 # app choose type of file SC or MV
-if saved_rows[1] == sgre_measured_values:
-    MeasureValues(saved_rows, turbines_list,data_lines_per_WTG)
-elif saved_rows[1] == sgre_status_code:
-    StatusCode(saved_rows, turbines_list)
-else:
-    print("please check if the file contain Status codes or Measured Values")
+# if saved_rows[1] == sgre_measured_values:
+#     MeasureValues(saved_rows, turbines_list,data_lines_per_WTG)
+# elif saved_rows[1] == sgre_status_code:
+#     StatusCode(saved_rows, turbines_list)
+# else:
+#     print("please check if the file contain Status codes or Measured Values")
