@@ -24,15 +24,13 @@ sgre_status_code = 'Status code list\n'
 
 def wtg_list(saved_rows):
     turbines_list1 = []
-    start_status_codes_for = []
 
     time_period = "time period:"
     for el in saved_rows[3:]:
         if str(el)[0:12] == time_period:
             break
         turbines_list1.append(el[:-1])
-        sc = [f'Status codes for  {el[:-1]}']
-        start_status_codes_for.append(sc)
+
     return turbines_list1
 
 turbines_list = wtg_list(saved_rows1)
