@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Upload CSV File</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-image: url('https://swiatoze.pl/wp-content/uploads/2021/11/rabih-shasha-tTv6Lo5uQVQ-unsplash-scaled.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            color: #fff;
+            text-shadow: 1px 1px 2px #000;
+        }
+        .container {
+            background: rgba(0, 0, 0, 0.6);
+            padding: 30px;
+            border-radius: 10px;
+        }
+        .form-group {
+            color: #000;
+        }
+        .btn-primary {
+            background-color: #0062cc;
+            border-color: #005cbf;
+        }
+        label {
+            color: #000;
+            text-shadow: none;
+        }
+        .custom-file-input ~ .custom-file-label::after {
+            content: 'Select CSV File';
+        }
+        .custom-file-label::after {
+            color: #000 !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center">Upload CSV File to split</h1>
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <form method="post" enctype="multipart/form-data" class="bg-light p-4 border rounded">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        {{ form.file.label_tag }}
+                        {{ form.file }}
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Generate</button>
+                    {% if error %}
+                        <div class="alert alert-danger mt-3">{{ error }}</div>
+                    {% endif %}
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
