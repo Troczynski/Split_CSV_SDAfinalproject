@@ -2,7 +2,7 @@
 import os
 import sys
 
-# Dodaj ścieżkę do katalogu z modułami, jeśli to konieczne
+
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
 import Split_csv_Measured_values
