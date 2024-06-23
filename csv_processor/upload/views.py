@@ -1,9 +1,11 @@
-import os
-import mimetypes
-import zipfile
-from django.shortcuts import render, HttpResponseRedirect, HttpResponse, Http404
+from django.shortcuts import render, HttpResponseRedirect, Http404,HttpResponse
 from .forms import UploadFileForm
 from .verified_file import verify_file
+from .models import GeneratedFileLog
+import os
+import zipfile
+from datetime import datetime
+import mimetypes
 
 
 def handle_uploaded_file(f):
@@ -14,34 +16,47 @@ def handle_uploaded_file(f):
     return file_path
 
 
+def get_turbine_name_from_csv(csv_file):
+    with open(csv_file, 'r') as f:
+        first_line = f.readline().strip()
+        second_line = f.readline().strip()
+        file_type = second_line.split(',')[0]
+        return file_type
+
 def create_zip_file(files, zip_filename):
     with zipfile.ZipFile(zip_filename, 'w') as zipf:
         for file in files:
             zipf.write(file, os.path.basename(file))
 
-
-def clear_previous_files():
-    # Usunięcie wcześniejszych plików CSV i archiwum ZIP
+def delete_previous_files():
+    # Usunięcie plików CSV i plik ZIP z katalogu roboczego
     for file in os.listdir('.'):
-        if file.endswith('.csv') and file != 'uploaded_file.csv':
+        if file.endswith('.csv') or file.endswith('.zip'):
             os.remove(file)
-    zip_file_path = 'processed_files.zip'
-    if os.path.exists(zip_file_path):
-        os.remove(zip_file_path)
-
 
 def upload_file(request):
     if request.method == 'POST':
         form = UploadFileForm(request.POST, request.FILES)
         if form.is_valid():
-            clear_previous_files()
+            # Usunięcie starych plików
+            delete_previous_files()
 
             file_path = handle_uploaded_file(request.FILES['file'])
             if verify_file(file_path):
-
                 processed_files = [f for f in os.listdir('.') if f.endswith('.csv') and f != 'uploaded_file.csv']
                 zip_file_path = 'processed_files.zip'
                 create_zip_file(processed_files, zip_file_path)
+
+                # Zapis logów do bazy danych
+                for file in processed_files:
+                    turbine_name = get_turbine_name_from_csv(file)
+                    log_entry = GeneratedFileLog.objects.create(
+                        file_type=turbine_name,
+                        file_name=file,
+                        generated_at=datetime.now()
+                    )
+                    log_entry.save()
+
                 return HttpResponseRedirect('/success/')
             else:
                 return HttpResponseRedirect('/invalid_file/')
