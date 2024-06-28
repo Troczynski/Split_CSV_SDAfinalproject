@@ -31,7 +31,7 @@ def MeasureValues(saved_rows, turbines_list, number_of_lines):
         nextfile_wtg.writelines(saved_rows[0:3])  # save 1st fixed block of text
         nextfile_wtg.writelines(element + '\n')
         nextfile_wtg.writelines(time_to_units_block)
-        # for element in  #create loop tubine +data available not the same order as turbineslist
+        # for element in  #create loop turbine +data available not the same order as turbineslist
         for wtg in data_available_wtg_no:
             if wtg == f'{element}\n':
                 nextfile_wtg.writelines(wtg)
@@ -47,6 +47,6 @@ def MeasureValues(saved_rows, turbines_list, number_of_lines):
         start_index_data += number_of_lines
         start_index_data += 1  # lineseparator
         end_index_data += number_of_lines
-        end_index_data += 1  # lineseparator
+        end_index_data += 1  # line-separator
 
         nextfile_wtg.close()
