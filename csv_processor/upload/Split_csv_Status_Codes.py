@@ -1,9 +1,4 @@
-"""code maybe working but is very ugly make class and
-functions with 2 params input file and amount of turbines /split sections
- and third params measured values or status code
-aaa
 
-"""
 
 import csv
 
