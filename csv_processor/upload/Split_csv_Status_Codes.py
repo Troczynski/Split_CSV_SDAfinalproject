@@ -22,7 +22,7 @@ def StatusCodesAll(turbines_list, file_directory):
 
     end = len(turbines_list) + 3
 
-    start_Status_codes_for = []
+    start_status_codes_for = []
 
     turbines_list = []
 
@@ -30,16 +30,15 @@ def StatusCodesAll(turbines_list, file_directory):
     for row in saved_rows[3:end]:
         start = [f'Status codes for  {str(row)[2:-2]}']
         start1 = [f'{str(row)[2:-2]}']
-        start_Status_codes_for.append(start)
+        start_status_codes_for.append(start)
         turbines_list.append(start1)
-
 
     # CREATE SEPARATE FILES
     i = 0
-    for element in turbines_list:  # while i <= len(start_Status_codes_for):
-        start_s = saved_rows.index(start_Status_codes_for[i])
+    for element in turbines_list:  # while i <= len(start_status_codes_for):
+        start_s = saved_rows.index(start_status_codes_for[i])
         try:
-            end_s = saved_rows.index(start_Status_codes_for[i + 1])
+            end_s = saved_rows.index(start_status_codes_for[i + 1])
         except IndexError:
             end_s = len(saved_rows)
         nameOfTurbine = f'SC_for_{str(turbines_list[i])[2:-2].replace("/", "_")}_{i + 1}.csv'
