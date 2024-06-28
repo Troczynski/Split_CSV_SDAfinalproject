@@ -9,6 +9,7 @@ import Split_csv_Status_Codes
 sgre_measured_values = '10 Minute Values, detailed\n'
 sgre_status_code = 'Status code list\n'
 
+
 def verify_file(file_path):
     with open(file_path, 'r') as dir_big_file:
         saved_rows1 = []

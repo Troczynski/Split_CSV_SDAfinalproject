@@ -33,8 +33,6 @@ def StatusCodesAll(turbines_list, file_directory):
         start_Status_codes_for.append(start)
         turbines_list.append(start1)
 
-    start_s = saved_rows.index(start_Status_codes_for[0])
-    end_s = saved_rows.index(start_Status_codes_for[1])
 
     # CREATE SEPARATE FILES
     i = 0
