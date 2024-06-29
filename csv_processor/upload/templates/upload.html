@@ -3,38 +3,8 @@
 <head>
     <title>Upload CSV File</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        body {
-            background-image: url('https://swiatoze.pl/wp-content/uploads/2021/11/rabih-shasha-tTv6Lo5uQVQ-unsplash-scaled.jpg');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            color: #fff;
-            text-shadow: 1px 1px 2px #000;
-        }
-        .container {
-            background: rgba(0, 0, 0, 0.6);
-            padding: 30px;
-            border-radius: 10px;
-        }
-        .form-group {
-            color: #000;
-        }
-        .btn-primary {
-            background-color: #0062cc;
-            border-color: #005cbf;
-        }
-        label {
-            color: #000;
-            text-shadow: none;
-        }
-        .custom-file-input ~ .custom-file-label::after {
-            content: 'Select CSV File';
-        }
-        .custom-file-label::after {
-            color: #000 !important;
-        }
-    </style>
+    {% load static %}
+    <link href="{% static '/css/style.css' %}" rel="stylesheet">
 </head>
 <body>
     <div class="container mt-5">
