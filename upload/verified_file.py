@@ -1,5 +1,5 @@
-from upload import Split_csv_Measured_values
-from upload import Split_csv_Status_Codes
+from upload import split_csv_measured_values
+from upload import split_csv_status_codes
 
 sgre_measured_values = '10 Minute Values, detailed\n'
 sgre_status_code = 'Status code list\n'
@@ -24,13 +24,13 @@ def verify_file(file_path):
         return turbines_list1
 
     turbines_list = wtg_list(saved_rows1)
-    data_lines_per_wtg = Split_csv_Measured_values.time_period(saved_rows1, turbines_list)
+    data_lines_per_wtg = split_csv_measured_values.time_period(saved_rows1, turbines_list)
 
     if saved_rows1[1] == sgre_measured_values:
-        Split_csv_Measured_values.measure_values(saved_rows1, turbines_list, data_lines_per_wtg)
+        split_csv_measured_values.measure_values(saved_rows1, turbines_list, data_lines_per_wtg)
         return True
     elif saved_rows1[1] == sgre_status_code:
-        Split_csv_Status_Codes.status_codes(turbines_list, file_path)
+        split_csv_status_codes.status_codes(turbines_list, file_path)
         return True
     else:
         return False
