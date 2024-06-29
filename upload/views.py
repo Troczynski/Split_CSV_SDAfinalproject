@@ -59,7 +59,7 @@ def upload_file(request):
                         file_name=file,
                         generated_at=datetime.now()
                     )
-                    log_entry.save()
+
 
                 return HttpResponseRedirect(success)
             else:

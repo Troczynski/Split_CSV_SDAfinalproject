@@ -3,7 +3,6 @@ import csv
 
 
 def status_codes(turbines_list, file_directory):
-    # if __name__ == "__main__":
 
     dir_big_file = file_directory
     # OPEN FILE WITH MULTIPLE TURBINES
